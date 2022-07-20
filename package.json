@@ -4,7 +4,7 @@
   "description": "Restrict users who can run an action",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc"
+    "build": "ncc build index.ts --minify -o dist"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.34.0",
