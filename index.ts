@@ -25,7 +25,7 @@ async function main() {
     const configFile = core.getInput('config_file', { required: false }) ?? '.devops.config';
     let allowed = await isUserAllowedByConfigFile(actor, configFile);
     // allowed ||= await isUserAllowedByCodeowners(actor);
-    
+    console.log(github);
     if (allowed) {
         core.info("User allowed to run action");
         return;
