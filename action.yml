@@ -1,0 +1,10 @@
+name: "Github Action Permissions"
+description: "Restrict users who can run an action"
+inputs:
+  config_file:
+    description: "JSON file with permissions"
+    required: false
+    default: ".devops.config"
+runs:
+  using: "node16"
+  main: "dist/index.js"
