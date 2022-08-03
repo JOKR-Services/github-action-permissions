@@ -35,7 +35,7 @@ async function isUserAllowedByConfigFile(actor: string, configFile: string, work
         const file = await fs.readFile(configFile);
         const actions: ActionPermissions = JSON.parse(file.toString()).action_permissions;
         if (!actions) {
-            core.warning('Config file missing required property: action_permissions');
+            core.warning('⚠️ Config file missing required property: action_permissions');
             return false;
         }
 
@@ -70,7 +70,7 @@ async function isUserAllowedByCodeowners(actor: string): Promise<boolean> {
             } catch (e) { }
         }
         if (!file) {
-            core.warning('CODEOWNERS not present in repository.');
+            core.warning('⚠️ CODEOWNERS not present in repository.');
             return false;
         }
         // Not checking for the exact action file that is running, because the filename is not the context
@@ -92,7 +92,7 @@ async function isUserAllowedByCodeowners(actor: string): Promise<boolean> {
             }
         }
     } catch (e: any) {
-        core.warning(`Error occurred when parsing CODEOWNERS file ${e.toString()}`);
+        core.warning(`⚠️ Error occurred when parsing CODEOWNERS file ${e.toString()}`);
     }
     return false;
 }
@@ -102,11 +102,11 @@ async function main() {
     let allowed = await isUserAllowedByConfigFile(actor, configFile, workflow);
     allowed ||= await isUserAllowedByCodeowners(actor);
     if (allowed) {
-        core.info("User allowed to run action");
+        core.info("✅ User allowed to run action");
         return;
     }
 
-    core.setFailed(`${actor} is not allowed to run this workflow. Add the user or their team to the config file or CODEOWNERS.`);
+    core.setFailed(`❌ ${actor} is not allowed to run this workflow. Add the user or their team to the config file or CODEOWNERS.`);
 }
 
 main();
