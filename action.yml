@@ -7,7 +7,7 @@ inputs:
     default: ".devops.config"
   token:
     description: "Github token. Use secrets.GITHUB_TOKEN for the default token."
-    required: false
+    required: true
 runs:
   using: "node16"
   main: "dist/index.js"
