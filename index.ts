@@ -15,7 +15,6 @@ async function getTeamMembers(team: string): Promise<string[]> {
     try {
         // Sometimes teams in CODEOWNERS files are in the form of: organization/team-name
         team = team.replace(/^\@/, '');
-        console.log(`Team: ${team}`);
         const teamSplit = team.split('/');
         let owner = github.context.repo.owner;
         if (teamSplit.length > 1) {
@@ -26,13 +25,9 @@ async function getTeamMembers(team: string): Promise<string[]> {
             org: owner,
             teamSlug: team
         })
-        console.log(teamMembers);
-
         return teamMembers.data.map((member: any) => member.login);
-    } catch (error) {
-        console.log("Error getting team members");
-        console.log(error);
-
+    } catch (error: any) {
+        core.warning('⚠️ Error getting team members ', error.message);
         return [];
     }
 }
