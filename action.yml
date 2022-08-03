@@ -5,6 +5,10 @@ inputs:
     description: "JSON file with permissions"
     required: false
     default: ".devops.config"
+  token:
+    description: "Github token. Use ${{ secrets.GITHUB_TOKEN }} for the default token."
+    required: false
+    default: "${{ secrets.GITHUB_TOKEN }}"
 runs:
   using: "node16"
   main: "dist/index.js"
