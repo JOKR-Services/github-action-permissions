@@ -14,6 +14,7 @@ interface ActionPermissions {
 async function getTeamMembers(team: string): Promise<string[]> {
     try {
         // Sometimes teams in CODEOWNERS files are in the form of: organization/team-name
+        team = team.replace(/^\@/, '');
         const teamSplit = team.split('/');
         let owner = github.context.repo.owner;
         if (teamSplit.length > 1) {
